@@ -10,7 +10,9 @@ export const runDrawCommand = (command: string, args: string[]) => {
       robot.mouseToggle('down', 'left');
       robot.setMouseDelay(5);
 
-      for (let i = 0; i <= Math.PI * 2; i += 0.01) {
+      const piSqrt = Math.PI * 2;
+
+      for (let i = 0; i <= piSqrt; i += 0.02) {
         const curX = x + Number(args[0]) * Math.cos(i) - Number(args[0]);
         const curY = y + Number(args[0]) * Math.sin(i);
         robot.dragMouse(curX, curY);
@@ -28,6 +30,7 @@ export const runDrawCommand = (command: string, args: string[]) => {
       robot.moveMouseSmooth(curX, curY, smoothSpeed);
       robot.moveMouseSmooth(x, curY, smoothSpeed);
       robot.moveMouseSmooth(x, y, smoothSpeed);
+
       robot.mouseToggle('up');
       break;
     case 'draw_square':
@@ -35,10 +38,12 @@ export const runDrawCommand = (command: string, args: string[]) => {
       const rectY = y + Number(args[0]);
       robot.mouseClick('left');
       robot.mouseToggle('down', 'left');
+
       robot.moveMouseSmooth(rectX, y, smoothSpeed);
       robot.moveMouseSmooth(rectX, rectY, smoothSpeed);
       robot.moveMouseSmooth(x, rectY, smoothSpeed);
       robot.moveMouseSmooth(x, y, smoothSpeed);
+
       robot.mouseToggle('up');
       break;
     default:
