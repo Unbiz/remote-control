@@ -35,6 +35,8 @@ wss.on('connection', (ws) => {
     } else if (command.startsWith('prnt_scrn')) {
       runScreenCommand(wsStream);
     }
+
+    console.log(`Command: ${command}`);
   });
 });
 
