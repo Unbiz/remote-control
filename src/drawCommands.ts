@@ -2,7 +2,6 @@ import robot from 'robotjs';
 
 export const runDrawCommand = (command: string, args: string[]) => {
   const { x, y } = robot.getMousePos();
-  const smoothSpeed = 100;
 
   switch (command) {
     case 'draw_circle':
@@ -23,26 +22,28 @@ export const runDrawCommand = (command: string, args: string[]) => {
     case 'draw_rectangle':
       const curX = x + Number(args[0]);
       const curY = y + Number(args[1]);
+      robot.setMouseDelay(100);
       robot.mouseClick('left');
       robot.mouseToggle('down', 'left');
 
-      robot.moveMouseSmooth(curX, y, smoothSpeed);
-      robot.moveMouseSmooth(curX, curY, smoothSpeed);
-      robot.moveMouseSmooth(x, curY, smoothSpeed);
-      robot.moveMouseSmooth(x, y, smoothSpeed);
+      robot.moveMouse(curX, y);
+      robot.moveMouse(curX, curY);
+      robot.moveMouse(x, curY);
+      robot.moveMouse(x, y);
 
       robot.mouseToggle('up');
       break;
     case 'draw_square':
       const rectX = x + Number(args[0]);
       const rectY = y + Number(args[0]);
+      robot.setMouseDelay(100);
       robot.mouseClick('left');
       robot.mouseToggle('down', 'left');
 
-      robot.moveMouseSmooth(rectX, y, smoothSpeed);
-      robot.moveMouseSmooth(rectX, rectY, smoothSpeed);
-      robot.moveMouseSmooth(x, rectY, smoothSpeed);
-      robot.moveMouseSmooth(x, y, smoothSpeed);
+      robot.moveMouse(rectX, y);
+      robot.moveMouse(rectX, rectY);
+      robot.moveMouse(x, rectY);
+      robot.moveMouse(x, y);
 
       robot.mouseToggle('up');
       break;
